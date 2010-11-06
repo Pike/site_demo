@@ -1,33 +1,8 @@
 # Django settings for site_demo project.
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
-ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
-)
+from local_settings import *
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'site_default',                      # Or path to database file if using sqlite3.
-        'USER': 'bdb',                      # Not used with sqlite3.
-        'PASSWORD': 'bdb',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    },
-    'status_read': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'import_status',                      # Or path to database file if using sqlite3.
-        'USER': 'bdb',                      # Not used with sqlite3.
-        'PASSWORD': 'bdb',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-
-}
 
 DATABASE_ROUTERS = ['site_demo.ReadOnlyRouter']
 
@@ -38,7 +13,7 @@ DATABASE_ROUTERS = ['site_demo.ReadOnlyRouter']
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'UTC'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -67,9 +42,6 @@ MEDIA_URL = ''
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = '/media/'
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = 'qui-w-o^i2(odn0c4%hwz^p48wu#mp^nbtz-86h5+y+0q@iixs'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -107,3 +79,8 @@ INSTALLED_APPS = (
     'dmstatus',
     'coconut',
 )
+# try adding locally installed apps
+try:
+    INSTALLED_APPS += LOCAL_INSTALL_APPS
+except:
+    pass
